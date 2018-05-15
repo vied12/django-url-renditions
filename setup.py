@@ -18,6 +18,7 @@ setup(
     url='https://vied12.github.io',
     author='Edouard Richard',
     author_email='edou4rd@gmail.com',
+    install_requires=['Pillow==5.1.0',],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
