@@ -1,6 +1,6 @@
 # django-url-renditions
 
-django-url-renditions allows to define rendition process to django url fields. This works pretty well with https://github.com/bradleyg/django-s3direct and Heroku.
+django-url-renditions allows to define and render renditions from django url fields. This works also pretty well with [django-s3direct]([https://github.com/bradleyg/django-s3direct]) fields.
 
 It comes with a Graphene `Query` that enable renditions in your GraphQL schema.
 

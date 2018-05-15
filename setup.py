@@ -9,12 +9,13 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-url-renditions',
-    version='0.1',
+    version='0.4',
     packages=find_packages(),
     include_package_data=True,
     license='BSD License',
     description='Create custom renditions from django url fields',
     long_description=README,
+    long_description_content_type='text/markdown',
     url='https://vied12.github.io',
     author='Edouard Richard',
     author_email='edou4rd@gmail.com',
