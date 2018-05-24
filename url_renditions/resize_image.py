@@ -18,6 +18,12 @@ def resize_and_upload(input, output, width, height):
     if image.mode == "CMYK":
         image = image.convert("RGB")
     if height:
+        if height > image.size[1]:
+            width = int(image.size[0] * (width / height))
+            height = image.size[1]
+        elif width > image.size[0]:
+            height = int(image.size[1] * (height / width))
+            width = image.size[0]
         # crop
         new_image = PIL.ImageOps.fit(
             image,

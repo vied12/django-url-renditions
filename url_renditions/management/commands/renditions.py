@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 for field in fields_to_reset:
                     if getattr(o, field.source):
                         to_be_saved = True
-                        self.stdout.write('reset {}'.format(o))
+                        self.stdout.write('reset field {} of {}'.format(field, o))
                         if getattr(o, field.name):
                             getattr(o, field.name).delete()
                             setattr(o, field.name, None)
