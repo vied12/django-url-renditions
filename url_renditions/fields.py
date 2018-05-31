@@ -1,12 +1,14 @@
 from .models import Original
 from django.db.models.signals import pre_save
-import django_rq
 from django.db import models
 import io
 import requests
+import importlib
 
 
-@django_rq.job
+django_rq = importlib.util.find_spec('django_rq')
+
+
 def create_renditions(renditions, parent, original, output):
     try:
         Original.objects.get(pk=original.pk)
@@ -49,8 +51,8 @@ class FileUrlWithRenditions(models.OneToOneField):
             setattr(instance, self.name, original_obj)
             # create renditions
             props = dict(renditions=self.renditions, output=self.output, parent=instance, original=original_obj)
-            if self.use_job_runner:
-                create_renditions.delay(**props)
+            if django_rq and self.use_job_runner:
+                django_rq.enqueue(create_renditions, **props)
             else:
                 create_renditions(**props)
 
