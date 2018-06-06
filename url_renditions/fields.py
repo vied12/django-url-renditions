@@ -15,9 +15,9 @@ def create_renditions(renditions, parent, original, output):
     except Original.DoesNotExist as e:
         raise e
     original_file = io.BytesIO(requests.get(original.href).content)
-    for rendition_name, rendition_obj in renditions.items():
+    for rendition_name, rendition_creator in renditions.items():
         # returns an unsaved rendition object
-        rendition_obj = rendition_obj.create_rendition(original_file=original_file, output=output)
+        rendition_obj = rendition_creator.create_rendition(original_file=original_file, output=output)
         rendition_obj.original = original
         rendition_obj.name = rendition_name
         rendition_obj.save(force_insert=True)
