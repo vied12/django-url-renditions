@@ -58,5 +58,7 @@ class FileUrlWithRenditions(models.OneToOneField):
 
     def contribute_to_class(self, cls, name):
         super(FileUrlWithRenditions, self).contribute_to_class(cls, name)
-        self.remote_field.related_name = '{}_{}'.format(cls.__name__, name)
-        pre_save.connect(self.handle_source_pre_save, sender=cls)
+        # source can be empty during django migrations
+        if self.source:
+            self.remote_field.related_name = '{}_{}'.format(cls.__name__, name)
+            pre_save.connect(self.handle_source_pre_save, sender=cls)
