@@ -31,9 +31,13 @@ def resize_and_upload(input, output, width, height):
             PIL.Image.ANTIALIAS
         )
     else:
-        wpercent = (width / float(image.size[0]))
-        height = int((float(image.size[1]) * float(wpercent)))
-        new_image = image.resize((width, height), PIL.Image.ANTIALIAS)
+        # if a bigger size of the original is asked, use original image
+        if width > image.size[0]:
+            new_image = image
+        else:
+            wpercent = (width / float(image.size[0]))
+            height = int((float(image.size[1]) * float(wpercent)))
+            new_image = image.resize((width, height), PIL.Image.ANTIALIAS)
 
     out_img = io.BytesIO()
     new_image.save(out_img, 'PNG')
@@ -51,8 +55,8 @@ def resize_and_upload(input, output, width, height):
             settings.AWS_STORAGE_BUCKET_NAME,
             uploaded.key,
         ),
-        'width': width,
-        'height': height,
+        'width': new_image.size[0],
+        'height': new_image.size[1],
     }
 
 
