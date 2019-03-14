@@ -28,7 +28,7 @@ def upload_mp3(audio_bin, output):
         ContentType='audio/mp3',
     )
     return 'https://s3.{}.amazonaws.com/{}/{}'.format(
-        settings.S3DIRECT_REGION,
+        settings.AWS_S3_REGION_NAME,
         settings.AWS_STORAGE_BUCKET_NAME,
         uploaded.key,
     )

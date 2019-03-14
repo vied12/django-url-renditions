@@ -49,10 +49,16 @@ def resize_and_upload(input, output, width, height):
         ContentDisposition='inline',
         ContentType='image/png',
     )
+    if hasattr(settings, 'AWS_S3_CUSTOM_DOMAIN') and settings.AWS_S3_CUSTOM_DOMAIN:
+        host = 'https://{}'.format(settings.AWS_S3_CUSTOM_DOMAIN)
+    else:
+        host = 'https://s3.{}.amazonaws.com/{}'.format(
+            settings.AWS_S3_REGION_NAME,
+            settings.AWS_STORAGE_BUCKET_NAME
+        )
     return {
-        'href': 'https://s3.{}.amazonaws.com/{}/{}'.format(
-            settings.S3DIRECT_REGION,
-            settings.AWS_STORAGE_BUCKET_NAME,
+        'href': '{}/{}'.format(
+            host,
             uploaded.key,
         ),
         'width': new_image.size[0],
