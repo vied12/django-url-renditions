@@ -19,7 +19,7 @@ setup(
     url='https://github.com/vied12/django-url-renditions',
     author='Edouard Richard',
     author_email='edou4rd@gmail.com',
-    install_requires=['Pillow==5.1.0',],
+    install_requires=['Pillow==8.1.1',],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
